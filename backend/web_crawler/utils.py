@@ -38,6 +38,6 @@ SCRAPING_FUNCTION_MAPPER = {
     'MYNTRA': scrape_myntra_product,
 }
 
-def scrape_price(url, website):
+def scrape_product_data(url, website):
     my_scraper_func = SCRAPING_FUNCTION_MAPPER[website]
     return my_scraper_func(url)

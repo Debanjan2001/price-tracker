@@ -21,7 +21,7 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api/price_tracker/', include('web_crawler.urls')),
+    path('api/', include(router.urls)),
+    path('api/', include('product.urls')),
 ]
