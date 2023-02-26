@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_q',
     'product',
 ]
 
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Calcutta'
 
 USE_I18N = True
 
@@ -128,3 +129,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100
 }
+
+Q_CLUSTER = {
+    'name': 'price-tracker-task-queue',
+    'workers': 4,
+    'timeout': 20, # Max 20 seconds for scraping one website
+    'max_attempts': 1,
+    'queue_limit': 100, 
+    'catch_up': False, # No catch-up for missed tasks
+    'orm': 'default',
+    # 'has_replica': True,
+}
+

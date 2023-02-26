@@ -1,4 +1,5 @@
 from django.db import models
+from django_q.models import Schedule 
 
 # Create your models here.
 class Product(models.Model):
@@ -11,6 +12,14 @@ class Product(models.Model):
     name = models.CharField(max_length = 1000, blank=False)
     url = models.URLField(max_length=500, unique=True, db_index=True)
     website = models.CharField(max_length=50, choices=AVAILABLE_CHOICES)
+    schedule_id = models.BigIntegerField(default=0)
+
+    def delete(self, *args, **kwargs):
+        try:
+            Schedule.objects.get(pk=self.schedule_id).delete()
+        except:
+            pass
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return f"{self.website}-{self.name[:50]}"

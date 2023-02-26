@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from .models import Product, PriceData
 from .serializers import ProductSerializer, PriceDataSerializer
 
-from web_crawler.utils import scrape_product_data
+from web_crawler.scraper import scrape_product_data
 
 # Create your views here.
 class ProductViewSet(viewsets.ModelViewSet):
