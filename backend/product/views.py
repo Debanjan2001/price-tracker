@@ -11,7 +11,7 @@ from web_crawler.scraper import scrape_product_data
 # Create your views here.
 class ProductViewSet(viewsets.ModelViewSet):
 
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('id')
     serializer_class = ProductSerializer
 
     def create(self, request):
@@ -27,7 +27,6 @@ class ProductViewSet(viewsets.ModelViewSet):
                 website=website
             )
 
-            price_data = PriceData.objects.create(product=product, price=product_price)
             serializer = ProductSerializer(product)
             return Response(
                 data=serializer.data,
